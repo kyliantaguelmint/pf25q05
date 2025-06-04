@@ -32,28 +32,28 @@ public class TTTConsoleNonOO {
    /** The entry main method (the program starts here) */
    public static void main(String[] args) {
       do {
-         // Initialize the board, currentState and currentPlayer
-         initGame();
+      // Initialize the board, currentState and currentPlayer
+      initGame();
 
-         // Play the game once
-         do {
-            // currentPlayer makes a move
-            // Update board[selectedRow][selectedCol] and currentState
-            stepGame();
-            // Refresh the display
-            paintBoard();
-            // Print message if game over
-            if (currentState == CROSS_WON) {
-               System.out.println("'X' won!\nBye!");
-            } else if (currentState == NOUGHT_WON) {
-               System.out.println("'O' won!\nBye!");
-            } else if (currentState == DRAW) {
-               System.out.println("It's a Draw!\nBye!");
-            }
-            // Switch currentPlayer
-            currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
-         } while (currentState == PLAYING); // repeat if not game over
-            // Prompt the user whether to play again
+      // Play the game once
+      do {
+         // currentPlayer makes a move
+         // Update board[selectedRow][selectedCol] and currentState
+         stepGame();
+         // Refresh the display
+         paintBoard();
+         // Print message if game over
+         if (currentState == CROSS_WON) {
+            System.out.println("'X' won!\nBye!");
+         } else if (currentState == NOUGHT_WON) {
+            System.out.println("'O' won!\nBye!");
+         } else if (currentState == DRAW) {
+            System.out.println("It's a Draw!\nBye!");
+         }
+         // Switch currentPlayer
+         currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
+      } while (currentState == PLAYING); // repeat if not game over
+                     // Prompt the user whether to play again
             System.out.print("Play again (y/n)? ");
             char ans = in.next().charAt(0);
             if (ans != 'y' && ans != 'Y') {
