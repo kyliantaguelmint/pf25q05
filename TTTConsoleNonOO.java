@@ -31,36 +31,44 @@ public class TTTConsoleNonOO {
 
    /** The entry main method (the program starts here) */
    public static void main(String[] args) {
-      do {
-      // Initialize the board, currentState and currentPlayer
-      initGame();
+      do{
+         // Initialize the board, currentState and currentPlayer
+         initGame();
 
-      // Play the game once
-      do {
-         // currentPlayer makes a move
-         // Update board[selectedRow][selectedCol] and currentState
-         stepGame();
-         // Refresh the display
-         paintBoard();
-         // Print message if game over
-         if (currentState == CROSS_WON) {
-            System.out.println("'X' won!\nBye!");
-         } else if (currentState == NOUGHT_WON) {
-            System.out.println("'O' won!\nBye!");
-         } else if (currentState == DRAW) {
-            System.out.println("It's a Draw!\nBye!");
-         }
-         // Switch currentPlayer
-         currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
-      } while (currentState == PLAYING); // repeat if not game over
-                     // Prompt the user whether to play again
+         // Play the game once
+         do {
+            // currentPlayer makes a move
+            // Update board[selectedRow][selectedCol] and currentState
+            stepGame();
+            // Refresh the display
+            paintBoard();
+            // Print message if game over
+            if (currentState == CROSS_WON) {
+               System.out.println("'X' won!\nBye!");
+            } else if (currentState == NOUGHT_WON) {
+               System.out.println("'O' won!\nBye!");
+            } else if (currentState == DRAW) {
+               System.out.println("It's a Draw!\nBye!");
+            }
+            // Switch currentPlayer
+            currentPlayer = (currentPlayer == CROSS) ? NOUGHT : CROSS;
+         } while (currentState == PLAYING); // repeat if not game over
+         boolean invalid = true;
+         do{
+            // Prompt the user whether to play again
             System.out.print("Play again (y/n)? ");
             char ans = in.next().charAt(0);
-            if (ans != 'y' && ans != 'Y') {
+            if (ans == 'n' || ans == 'N') {
                System.out.println("Bye!");
                System.exit(0);  // terminate the program
+            } else if (ans == 'y' || ans == 'Y'){
+               invalid = false;
+            } else{
+               System.out.println("invalid input, please try again");
             }
-      } while (true);
+         }while(invalid);
+
+      }while(true);
    }
 
    /** Initialize the board[][], currentState and currentPlayer for a new game*/
@@ -75,7 +83,7 @@ public class TTTConsoleNonOO {
    }
 
    /** The currentPlayer makes one move (one step).
-       Update board[selectedRow][selectedCol] and currentState. */
+    Update board[selectedRow][selectedCol] and currentState. */
    public static void stepGame() {
       boolean validInput = false;  // for input validation
       do {
@@ -87,13 +95,13 @@ public class TTTConsoleNonOO {
          int row = in.nextInt() - 1;  // array index starts at 0 instead of 1
          int col = in.nextInt() - 1;
          if (row >= 0 && row < ROWS && col >= 0 && col < COLS
-                      && board[row][col] == NO_SEED) {
+                 && board[row][col] == NO_SEED) {
             // Update board[][] and return the new game state after the move
             currentState = stepGameUpdate(currentPlayer, row, col);
             validInput = true;  // input okay, exit loop
          } else {
             System.out.println("This move at (" + (row + 1) + "," + (col + 1)
-                  + ") is not valid. Try again...");
+                    + ") is not valid. Try again...");
          }
       } while (!validInput);  // repeat if input is invalid
    }
@@ -111,19 +119,19 @@ public class TTTConsoleNonOO {
 
       // Compute and return the new game state
       if (board[selectedRow][0] == player       // 3-in-the-row
-                && board[selectedRow][1] == player
-                && board[selectedRow][2] == player
-             || board[0][selectedCol] == player // 3-in-the-column
-                && board[1][selectedCol] == player
-                && board[2][selectedCol] == player
-             || selectedRow == selectedCol      // 3-in-the-diagonal
-                && board[0][0] == player
-                && board[1][1] == player
-                && board[2][2] == player
-             || selectedRow + selectedCol == 2  // 3-in-the-opposite-diagonal
-                && board[0][2] == player
-                && board[1][1] == player
-                && board[2][0] == player) {
+              && board[selectedRow][1] == player
+              && board[selectedRow][2] == player
+              || board[0][selectedCol] == player // 3-in-the-column
+              && board[1][selectedCol] == player
+              && board[2][selectedCol] == player
+              || selectedRow == selectedCol      // 3-in-the-diagonal
+              && board[0][0] == player
+              && board[1][1] == player
+              && board[2][2] == player
+              || selectedRow + selectedCol == 2  // 3-in-the-opposite-diagonal
+              && board[0][2] == player
+              && board[1][1] == player
+              && board[2][0] == player) {
          return (player == CROSS) ? CROSS_WON : NOUGHT_WON;
       } else {
          // Nobody win. Check for DRAW (all cells occupied) or PLAYING.
