@@ -31,8 +31,9 @@ public class TTTConsoleNonOO {
 
    /** The entry main method (the program starts here) */
    public static void main(String[] args) {
-      // Initialize the board, currentState and currentPlayer
-      initGame();
+      do {
+         // Initialize the board, currentState and currentPlayer
+         initGame();
 
          // Play the game once
          do {
