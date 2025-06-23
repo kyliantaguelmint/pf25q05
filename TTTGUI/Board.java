@@ -1,4 +1,3 @@
-package TTTGUI;
 import java.awt.*;
 /**
  * The TTT.Board class models the ROWS-by-COLS game board.
@@ -17,7 +16,7 @@ public class Board {
 
     // Define properties (package-visible)
     /** Composes of 2D array of ROWS-by-COLS TTT.Cell instances */
-    Cell[][] cells;
+    public Cell[][] cells;
 
     /** Constructor to initialize the game board */
     public Board() {
