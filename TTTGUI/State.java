@@ -1,3 +1,4 @@
+package TTTGUI;
 
 /**
  *  The enum TTT.State contains the various game states of the TTT game
