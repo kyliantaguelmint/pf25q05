@@ -30,5 +30,5 @@ public class Player {
     public String toString() {
         return username + "," + score;
     }
-}
+
 }
